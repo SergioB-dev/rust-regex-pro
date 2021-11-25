@@ -1,14 +1,16 @@
-
-use clap::{Arg, App, SubCommand};
-use cli_regex::basic::Game;
+use clap::{App, Arg};
 use cli_regex::game_flow::{begin_game, show_ascii_art};
 use cli_regex::terminal_controls::clear_screen;
 
 
 fn main() {
+
     clear_screen();
     show_ascii_art();
+
+    #[allow(unused_mut)]
     let mut running_game = begin_game();
+
     let matches = App::new("First Test")
         .version("1.0")
         .author("Sergio Bost <mail@sergio.dev>")

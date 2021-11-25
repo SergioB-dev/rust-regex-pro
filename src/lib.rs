@@ -13,6 +13,7 @@ pub mod basic {
         }
 
         pub fn create_level_based_game(chosen_level: Level) -> Game {
+            #[allow(unused_assignments)]
             let mut beginning_message = "".to_string();
             match chosen_level {
                 Level::Easy => beginning_message = "Alright, you better score 100%".to_string(),
@@ -39,17 +40,12 @@ pub mod basic {
 
 /// Control panel for the flow of the game from start to finish.
 pub mod game_flow {
-    use std::error::Error;
     use std::io;
-    use std::io::{stdout, Write};
-    use crossterm::cursor::Hide;
-    use crossterm::{ExecutableCommand, execute, QueueableCommand};
-    use crossterm::terminal::{Clear, ClearType, EnterAlternateScreen};
     use crate::basic::{Game, Level};
     use crate::basic::Level::Easy;
 
 
-    pub fn show_ascii_art() -> Result<(), Box<dyn Error>>{
+    pub fn show_ascii_art() {
 
         let asci_art = r#"
         __________                                        __________
@@ -60,12 +56,11 @@ pub mod game_flow {
         \/     \/_____/      \/      \/
         "#;
 
-        let mut stdout = io::stdout();
+
         println!("{}", asci_art);
-        Ok(())
+
     }
     pub fn begin_game() -> Game {
-        let mut s = String::new();
         println!("Select a difficulty");
         println!("1: Easy, 2: Medium, 3: Hard");
         let mut difficulty = String::new();
