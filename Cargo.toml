@@ -9,3 +9,4 @@ edition = "2021"
 [dependencies]
 clap = "~2.33"
 crossterm = "0.22.1"
+regex = "1.5.4"

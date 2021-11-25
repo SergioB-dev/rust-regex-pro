@@ -1,5 +1,5 @@
 
-
+/// Basic definitions of objects
 pub mod basic {
     pub struct Game {
         pub name: String,
@@ -37,6 +37,7 @@ pub mod basic {
     }
 }
 
+/// Control panel for the flow of the game from start to finish.
 pub mod game_flow {
     use std::error::Error;
     use std::io;
@@ -86,9 +87,32 @@ pub mod game_flow {
     }
 }
 
+/// Basic terminal controls
 pub mod terminal_controls {
     pub fn clear_screen() {
         std::process::Command::new("clear").status().unwrap();
-
     }
 }
+
+/// Regex based questions and answers
+pub mod regex_qa {
+    use regex::Regex;
+
+    pub fn is_good_regex(r: Regex, query_string: &str) -> bool {
+        r.is_match(query_string)
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use regex::Regex;
+        use crate::regex_qa::is_good_regex;
+
+        #[test]
+        fn basic_regex() {
+            let re = Regex::new(r"^\d{4}-\d{2}-\d{2}$").unwrap();
+            let search_string = "2014-02-01";
+            assert!(is_good_regex(re, search_string))
+        }
+    }
+}
+
