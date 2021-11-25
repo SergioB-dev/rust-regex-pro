@@ -21,7 +21,7 @@ To get started:
   - `cargo build` will download all of the dependencies needed for the project. It will aslo give you a `/target` directory. This is needed for our next command. 
 
 - `target/debug/cli-regex -c none` 
-  - Don't worry about the syntax for now - that is likely to change. This is just a quick way to the project to run on your machine. 
+  - Don't worry about the syntax for now - that is likely to change. This is just a quick way to get the project to run on your machine. 
   
   
 ## A CLI gamified journey for getting nice with Regex
