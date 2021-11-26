@@ -1,8 +1,14 @@
 mod explanations;
 mod user;
+<<<<<<< HEAD
+=======
+mod questions;
+>>>>>>> 72945dc2fd12718245c43396b63772dad8e6bf47
 
 /// Basic definitions of objects
 pub mod basic {
+    use crate::questions;
+
     pub struct Game {
         pub name: String,
         pub level: Level,
@@ -19,6 +25,7 @@ pub mod basic {
         }
 
         pub fn create_level_based_game(chosen_level: Level) -> Game {
+<<<<<<< HEAD
             #[allow(unused_assignments)]
             let mut beginning_message = "".to_string();
             match chosen_level {
@@ -34,13 +41,40 @@ pub mod basic {
                 level: chosen_level,
                 message: Some(beginning_message),
             }
+=======
+            let beginning_message = match chosen_level {
+                Level::Easy => "Alright, you better score 100%".to_string(),
+                Level::Medium => "Alright, let's see what you can do!".to_string(),
+                Level::Hard => "Oh boy, feeling good are we?".to_string(),
+            };
+
+            Game {
+                name: "Player 1".to_string(),
+                level: chosen_level,
+                message: Some(beginning_message),
+            }
+>>>>>>> 72945dc2fd12718245c43396b63772dad8e6bf47
         }
 
         pub fn print_game_details(&self) {
             println!("Player's name is: {}", self.name);
             println!("Chosen level is: {:?}", self.level);
         }
+<<<<<<< HEAD
+=======
     }
+
+    impl Game {
+        pub fn ask_question(&self) {
+            match self.level {
+                Level::Easy => questions::ask_user_question("2004-10-21"),
+                Level::Medium => questions::ask_user_question("2004-10-22"),
+                Level::Hard => questions::ask_user_question("2004-10-23"),
+            }
+        }
+>>>>>>> 72945dc2fd12718245c43396b63772dad8e6bf47
+    }
+
     #[derive(Debug)]
     pub enum Level {
         Easy,
@@ -51,7 +85,10 @@ pub mod basic {
 
 /// Control panel for the flow of the game from start to finish.
 pub mod game_flow {
+<<<<<<< HEAD
     use crate::basic::Level::Easy;
+=======
+>>>>>>> 72945dc2fd12718245c43396b63772dad8e6bf47
     use crate::basic::{Game, Level};
     use std::io;
 
@@ -77,6 +114,7 @@ pub mod game_flow {
             .expect("Failed to read line");
 
         println!("{}", difficulty);
+<<<<<<< HEAD
         let mut chosen_level: Level = Easy;
         match difficulty.trim().parse::<i32>().unwrap() {
             2 => {
@@ -85,6 +123,16 @@ pub mod game_flow {
             }
             3 => chosen_level = Level::Hard,
             _ => (),
+=======
+        let chosen_level: Level = match difficulty.trim().parse::<i32>() {
+            Ok(2) => Level::Medium,
+            Ok(3) => Level::Hard,
+            Ok(_) => Level::Easy,
+            Err(_err) => {
+                // TODO handle error in case the input is not an integer
+                Level::Easy
+            }
+>>>>>>> 72945dc2fd12718245c43396b63772dad8e6bf47
         };
         println!("{:?}", chosen_level);
         Game::create_level_based_game(chosen_level)

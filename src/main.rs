@@ -1,7 +1,7 @@
 use clap::{App, Arg};
 use cli_regex::game_flow::{begin_game, show_ascii_art};
 use cli_regex::terminal_controls::clear_screen;
-mod questions;
+// mod questions;
 
 fn main() {
     clear_screen();
@@ -10,8 +10,12 @@ fn main() {
     let mut running_game = begin_game();
     clear_screen();
     show_ascii_art();
+<<<<<<< HEAD
 
     questions::ask_user_question("2004-10-20");
+=======
+    running_game.ask_question();
+>>>>>>> 72945dc2fd12718245c43396b63772dad8e6bf47
 
     let matches = App::new("First Test")
         .version("1.0")
