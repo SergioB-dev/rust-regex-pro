@@ -1,5 +1,5 @@
 
-
+mod user;
 /// Basic definitions of objects
 pub mod basic {
     pub struct Game {
