@@ -19,15 +19,11 @@ pub mod basic {
         }
 
         pub fn create_level_based_game(chosen_level: Level) -> Game {
-            #[allow(unused_assignments)]
-            let mut beginning_message = "".to_string();
-            match chosen_level {
-                Level::Easy => beginning_message = "Alright, you better score 100%".to_string(),
-                Level::Medium => {
-                    beginning_message = "Alright, let's see what you can do!".to_string()
-                }
-                Level::Hard => beginning_message = "Oh boy, feeling good are we?".to_string(),
-            }
+            let beginning_message = match chosen_level {
+                Level::Easy => "Alright, you better score 100%".to_string(),
+                Level::Medium => "Alright, let's see what you can do!".to_string(),
+                Level::Hard => "Oh boy, feeling good are we?".to_string(),
+            };
 
             Game {
                 name: "Player 1".to_string(),
