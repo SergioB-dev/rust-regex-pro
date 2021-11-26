@@ -1,8 +1,11 @@
 mod explanations;
 mod user;
+mod questions;
 
 /// Basic definitions of objects
 pub mod basic {
+    use crate::questions;
+
     pub struct Game {
         pub name: String,
         pub level: Level,
@@ -37,6 +40,17 @@ pub mod basic {
             println!("Chosen level is: {:?}", self.level);
         }
     }
+
+    impl Game {
+        pub fn ask_question(&self) {
+            match self.level {
+                Level::Easy => questions::ask_user_question("2004-10-21"),
+                Level::Medium => questions::ask_user_question("2004-10-22"),
+                Level::Hard => questions::ask_user_question("2004-10-23"),
+            }
+        }
+    }
+
     #[derive(Debug)]
     pub enum Level {
         Easy,
