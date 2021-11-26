@@ -61,7 +61,6 @@ pub mod basic {
 
 /// Control panel for the flow of the game from start to finish.
 pub mod game_flow {
-    use crate::basic::Level::Easy;
     use crate::basic::{Game, Level};
     use std::io;
 
