@@ -4,14 +4,16 @@ use cli_regex::terminal_controls::clear_screen;
 mod questions;
 
 fn main() {
-
+    clear_screen();
+    show_ascii_art();
+    #[allow(unused_mut)]
+    let mut running_game = begin_game();
     clear_screen();
     show_ascii_art();
 
     questions::ask_user_question("2004-10-20");
 
-    #[allow(unused_mut)]
-    let mut running_game = begin_game();
+
 
     let matches = App::new("First Test")
         .version("1.0")
