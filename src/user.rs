@@ -5,9 +5,9 @@ struct User {
     score: u16,
     correct: u8,
     wrong: u8,
-
     //TODO: Implement a ranking system
     //ranking: ??
+
 
     //answers
 }
@@ -17,7 +17,6 @@ struct User {
 ///
 #[allow(unused)]
 impl User {
-
     /// Called when a user answers correctly
     /// qta = (Q)uestion (T)ype (A)nswered - Can be Easy, Medium, or Hard
     /// Depending on the level of difficulty of their question, this will determine how much to

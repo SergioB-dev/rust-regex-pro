@@ -13,18 +13,18 @@ fn main() {
 
     questions::ask_user_question("2004-10-20");
 
-
-
     let matches = App::new("First Test")
         .version("1.0")
         .author("Sergio Bost <mail@sergio.dev>")
         .about("Do something awesome")
-        .arg(Arg::with_name("config")
-            .short("c")
-            .long("config")
-            .value_name("FILE")
-            .help("Sets a custom config file")
-            .takes_value(true))
+        .arg(
+            Arg::with_name("config")
+                .short("c")
+                .long("config")
+                .value_name("FILE")
+                .help("Sets a custom config file")
+                .takes_value(true),
+        )
         // .arg(Arg::with_name("Level")
         //     .short("l")
         //     .long("level")
@@ -32,15 +32,10 @@ fn main() {
         //     .required(true)
         //     //.index(1)
         //     .takes_value(true)
-
         .get_matches();
-
-
 
     //println!("{}", running_game.message.unwrap());
     running_game.print_game_details();
     let config = matches.value_of("config").unwrap_or("default.conf");
     println!("Value for config is: {}", config);
-
 }
-

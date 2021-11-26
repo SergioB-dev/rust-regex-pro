@@ -5,14 +5,15 @@
 struct Explanation {
     topic: RegexTopic,
     description: &'static str,
-
 }
 
 #[allow(unused)]
 enum RegexTopic {
     CharacterClass(&'static str),
-
 }
 
 #[allow(unused)]
-const DIGITS: Explanation = Explanation { topic: RegexTopic::CharacterClass(r"\d"), description: "test"};
+const DIGITS: Explanation = Explanation {
+    topic: RegexTopic::CharacterClass(r"\d"),
+    description: "test",
+};

@@ -1,6 +1,5 @@
-
-mod user;
 mod explanations;
+mod user;
 
 /// Basic definitions of objects
 pub mod basic {
@@ -12,7 +11,11 @@ pub mod basic {
 
     impl Game {
         pub fn basic() -> Game {
-            Game { name: "Player 1".to_string(), level: Level::Easy, message: None }
+            Game {
+                name: "Player 1".to_string(),
+                level: Level::Easy,
+                message: None,
+            }
         }
 
         pub fn create_level_based_game(chosen_level: Level) -> Game {
@@ -20,36 +23,39 @@ pub mod basic {
             let mut beginning_message = "".to_string();
             match chosen_level {
                 Level::Easy => beginning_message = "Alright, you better score 100%".to_string(),
-                Level::Medium => beginning_message = "Alright, let's see what you can do!".to_string(),
-                Level::Hard => beginning_message = "Oh boy, feeling good are we?".to_string()
+                Level::Medium => {
+                    beginning_message = "Alright, let's see what you can do!".to_string()
+                }
+                Level::Hard => beginning_message = "Oh boy, feeling good are we?".to_string(),
             }
 
-            Game { name: "Player 1".to_string(), level: chosen_level, message: Some(beginning_message) }
+            Game {
+                name: "Player 1".to_string(),
+                level: chosen_level,
+                message: Some(beginning_message),
+            }
         }
 
         pub fn print_game_details(&self) {
             println!("Player's name is: {}", self.name);
             println!("Chosen level is: {:?}", self.level);
         }
-
     }
     #[derive(Debug)]
     pub enum Level {
         Easy,
         Medium,
-        Hard
+        Hard,
     }
 }
 
 /// Control panel for the flow of the game from start to finish.
 pub mod game_flow {
-    use std::io;
-    use crate::basic::{Game, Level};
     use crate::basic::Level::Easy;
-
+    use crate::basic::{Game, Level};
+    use std::io;
 
     pub fn show_ascii_art() {
-
         let asci_art = r#"
         __________                                        __________
 \______   \ ____   ____   ____ ___  ___           \______   \_______  ____
@@ -59,9 +65,7 @@ pub mod game_flow {
         \/     \/_____/      \/      \/
         "#;
 
-
         println!("{}", asci_art);
-
     }
     pub fn begin_game() -> Game {
         println!("Select a difficulty");
@@ -69,16 +73,18 @@ pub mod game_flow {
         let mut difficulty = String::new();
 
         io::stdin()
-            .read_line( &mut difficulty)
+            .read_line(&mut difficulty)
             .expect("Failed to read line");
 
         println!("{}", difficulty);
         let mut chosen_level: Level = Easy;
         match difficulty.trim().parse::<i32>().unwrap() {
-
-                2     => {chosen_level = Level::Medium; println!("Choosing Medium")},
-                3     => {chosen_level = Level::Hard},
-                _       => (),
+            2 => {
+                chosen_level = Level::Medium;
+                println!("Choosing Medium")
+            }
+            3 => chosen_level = Level::Hard,
+            _ => (),
         };
         println!("{:?}", chosen_level);
         Game::create_level_based_game(chosen_level)
@@ -102,8 +108,8 @@ pub mod regex_qa {
 
     #[cfg(test)]
     mod tests {
-        use regex::Regex;
         use crate::regex_qa::is_good_regex;
+        use regex::Regex;
 
         #[test]
         fn basic_regex() {
@@ -113,4 +119,3 @@ pub mod regex_qa {
         }
     }
 }
-
