@@ -3,12 +3,12 @@
 
 struct Explanation {
     topic: RegexTopic,
-    description: &str,
+    description: &'static str,
 
 }
 
 enum RegexTopic {
-    CharacterClass(&str),
+    CharacterClass(&'static str),
 
 }
 

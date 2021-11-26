@@ -7,6 +7,8 @@ struct User {
 
     //TODO: Implement a ranking system
     //ranking: ??
+
+    //answers
 }
 
 /// Represents the end user - the person playing the regex game. Keeps track of all relevant data during
@@ -26,4 +28,9 @@ impl User {
         //TODO: Returns a pct % based on correct / wrong ratio.
         unimplemented!()
     }
+}
+
+struct Answer {
+    correct: bool,
+    string_value: &'static str,
 }
