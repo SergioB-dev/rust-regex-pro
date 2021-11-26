@@ -1,12 +1,14 @@
 use clap::{App, Arg};
 use cli_regex::game_flow::{begin_game, show_ascii_art};
 use cli_regex::terminal_controls::clear_screen;
-
+mod questions;
 
 fn main() {
 
     clear_screen();
     show_ascii_art();
+
+    questions::ask_user_question("2004-10-20");
 
     #[allow(unused_mut)]
     let mut running_game = begin_game();
