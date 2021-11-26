@@ -1,5 +1,6 @@
 use crate::basic::Level;
 
+#[allow(unused)]
 struct User {
     score: u16,
     correct: u8,
@@ -13,6 +14,8 @@ struct User {
 
 /// Represents the end user - the person playing the regex game. Keeps track of all relevant data during
 /// their journey.
+///
+#[allow(unused)]
 impl User {
 
     /// Called when a user answers correctly
@@ -30,6 +33,8 @@ impl User {
     }
 }
 
+//TODO: This will need to be persisted
+#[allow(unused)]
 struct Answer {
     correct: bool,
     string_value: &'static str,
