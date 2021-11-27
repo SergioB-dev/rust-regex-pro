@@ -128,7 +128,7 @@ pub mod regex_qa {
     pub fn is_good_regex(r: Regex, query_string: &str) -> bool {
         //FIXME: Buggy. User can enter erroneous regex and still be valid.
           if let Some(re) = r.captures(query_string) {
-              true
+              re.get(0).map_or("", |m| m.as_str()) == query_string
           } else {
               false
           }
@@ -140,10 +140,18 @@ pub mod regex_qa {
         use regex::Regex;
 
         #[test]
-        fn basic_regex() {
-            let re = Regex::new(r"^\d{4}-\d{2}-\d{2}").unwrap();
+        fn assert_working_re() {
+            let good_re = Regex::new(r"^\d{4}-\d{2}-\d{2}").unwrap();
             let search_string = "2014-02-01";
-            assert!(is_good_regex(re, search_string))
+            assert!(is_good_regex(good_re, search_string))
+        }
+
+        #[test]
+        fn spot_faulty_re() {
+            let bad_re = Regex::new(r"\d{4}").unwrap();
+            let search_string = "2004-12-12";
+            assert_ne!(is_good_regex(bad_re, search_string), true)
         }
     }
 }
+
