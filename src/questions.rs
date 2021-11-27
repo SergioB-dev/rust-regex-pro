@@ -1,5 +1,5 @@
-use regex::Regex;
 use std::io::stdin;
+use regex::Regex;
 
 use crate::regex_qa::is_good_regex;
 

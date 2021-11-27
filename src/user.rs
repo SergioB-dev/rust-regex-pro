@@ -1,14 +1,13 @@
 
 use crate::basic::Level;
 
-#[allow(unused)]
 pub struct User {
     pub score: u16,
     pub correct: u8,
     pub wrong: u8,
     pub ranking: Ranking,
-}
 
+}
 /// Represents the end user - the person playing the regex game. Keeps track of all relevant data during
 /// their journey.
 ///

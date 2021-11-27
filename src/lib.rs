@@ -1,5 +1,6 @@
-pub mod explanations;
-pub mod questions;
+
+mod explanations;
+mod questions;
 pub mod user;
 
 /// Basic definitions of objects
@@ -22,6 +23,7 @@ pub mod basic {
         }
 
         pub fn create_level_based_game(chosen_level: Level) -> Game {
+
             let beginning_message = match chosen_level {
                 Level::Easy => "Alright, you better score 100%".to_string(),
                 Level::Medium => "Alright, let's see what you can do!".to_string(),
@@ -61,6 +63,7 @@ pub mod basic {
 
 /// Control panel for the flow of the game from start to finish.
 pub mod game_flow {
+
     use crate::basic::{Game, Level};
     use std::io;
 
@@ -96,6 +99,7 @@ pub mod game_flow {
             .expect("Failed to read line");
 
         println!("{}", difficulty);
+
         let chosen_level: Level = match difficulty.trim().parse::<i32>() {
             Ok(2) => Level::Medium,
             Ok(3) => Level::Hard,

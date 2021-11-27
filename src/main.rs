@@ -13,6 +13,7 @@ fn main() {
     let mut running_game = begin_game();
     clear_screen();
     show_ascii_art();
+
     running_game.ask_question();
 
     let matches = App::new("First Test")
