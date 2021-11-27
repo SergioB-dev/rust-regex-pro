@@ -13,6 +13,7 @@ pub fn ask_user_question(search_string: &str) {
     stdin().read_line(&mut input).expect("Failed to read input");
 
     let re = Regex::new(&input.trim()).unwrap();
+    println!("{:?}", &re);
 
     // Print if the regex is correct or wrong
     match is_good_regex(re, search_string) {

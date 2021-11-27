@@ -1,11 +1,14 @@
 use clap::{App, Arg};
-use cli_regex::game_flow::{begin_game, show_ascii_art};
+use cli_regex::game_flow::{begin_game, show_ascii_art, show_game_header};
 use cli_regex::terminal_controls::clear_screen;
+use cli_regex::user::User;
 // mod questions;
 
 fn main() {
+    let user = User::new();
     clear_screen();
-    show_ascii_art();
+    show_game_header(user);
+
     #[allow(unused_mut)]
     let mut running_game = begin_game();
     clear_screen();

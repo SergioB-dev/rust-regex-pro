@@ -1,6 +1,6 @@
-mod explanations;
-mod user;
-mod questions;
+pub mod explanations;
+pub mod questions;
+pub mod user;
 
 /// Basic definitions of objects
 pub mod basic {
@@ -64,6 +64,8 @@ pub mod game_flow {
     use crate::basic::{Game, Level};
     use std::io;
 
+    use crate::user::User;
+
     pub fn show_ascii_art() {
         let asci_art = r#"
         __________                                        __________
@@ -76,6 +78,14 @@ pub mod game_flow {
 
         println!("{}", asci_art);
     }
+
+    pub fn show_game_header(user: User) {
+        show_ascii_art();
+        let user_win_pct = user.pct();
+        let user_ranking = user.get_user_ranking();
+        println!("\t%: {} \tRank: {}", user_win_pct, user_ranking);
+    }
+
     pub fn begin_game() -> Game {
         println!("Select a difficulty");
         println!("1: Easy, 2: Medium, 3: Hard");
@@ -112,7 +122,12 @@ pub mod regex_qa {
     use regex::Regex;
 
     pub fn is_good_regex(r: Regex, query_string: &str) -> bool {
-        r.is_match(query_string)
+        //FIXME: Buggy. User can enter erroneous regex and still be valid.
+          if let Some(re) = r.captures(query_string) {
+              true
+          } else {
+              false
+          }
     }
 
     #[cfg(test)]
@@ -122,7 +137,7 @@ pub mod regex_qa {
 
         #[test]
         fn basic_regex() {
-            let re = Regex::new(r"^\d{4}-\d{2}-\d{2}$").unwrap();
+            let re = Regex::new(r"^\d{4}-\d{2}-\d{2}").unwrap();
             let search_string = "2014-02-01";
             assert!(is_good_regex(re, search_string))
         }
