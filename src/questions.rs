@@ -4,8 +4,8 @@ use regex::Regex;
 use crate::regex_qa::is_good_regex;
 use crate::user::User;
 
-/// A function that takes a search string such as: '2003-10-20' and does something. The function is incomplete at this point.
-/// `Result` indicates whether the user's answer was right or wrong, we should do something with that.
+/// A function that takes a search string such as: '2003-10-20' and does something
+/// and increments the user's `correct` or `wrong` property.
 pub fn ask_user_question(search_string: &str, user: &mut User) {
     println!("As your first challenge, come up with a clever regex to capture this: \n\n\n\n");
     println!("\t \t--> {} <--", search_string);
@@ -25,8 +25,5 @@ pub fn ask_user_question(search_string: &str, user: &mut User) {
             println!("Wrong");
             user.wrong += 1;
         },
-
     }
-
-    //TODO: Do something with our result, preferably increment the User's score / ranking
 }

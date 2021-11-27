@@ -2,7 +2,6 @@
 use crate::basic::Level;
 
 pub struct User {
-    pub score: u16,
     pub correct: u8,
     pub wrong: u8,
     pub ranking: Ranking,
@@ -16,7 +15,6 @@ impl User {
     /// Creates a new user from scratch
     pub fn new() -> User {
         User {
-            score: 0,
             correct: 0,
             wrong: 0,
             ranking: Ranking::Noob,
@@ -29,7 +27,7 @@ impl User {
     /// increment their score by.
     pub fn increment(&mut self, qta: Level) {
         //TODO: Current implementation is basic and not correct, see above documentation
-        self.score += 1;
+
     }
 
     pub fn pct(&self) -> f32 {
@@ -50,6 +48,15 @@ impl User {
             Ranking::Knight => "Knight",
             Ranking::Sage => "Sage",
             Ranking::Master => "Master",
+        }
+    }
+
+    pub fn calculate_score(&self) -> u32 {
+        let total: i8 = (self.correct as i8) - (self.wrong as i8);
+        if total < 0 {
+            0u32
+        } else {
+            (total * 100) as u32
         }
     }
 }
@@ -79,7 +86,6 @@ mod tests {
     #[test]
     fn test_pct() {
         let user1 = User {
-            score: 0,
             correct: 15,
             wrong: 15,
             ranking: Ranking::Noob

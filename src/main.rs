@@ -5,16 +5,22 @@ use cli_regex::user::User;
 // mod questions;
 
 fn main() {
-    let user = User::new();
+    let mut user = User::new();
     clear_screen();
-    show_game_header(user);
+    show_game_header(&user);
 
     #[allow(unused_mut)]
     let mut running_game = begin_game();
     clear_screen();
-    show_ascii_art();
+    show_game_header(&user);
 
-    running_game.ask_question();
+    running_game.ask_question(&mut user);
+    clear_screen();
+    show_game_header(&user);
+    running_game.ask_question(&mut user);
+    clear_screen();
+    show_game_header(&user);
+    running_game.ask_question(&mut user);
 
     let matches = App::new("First Test")
         .version("1.0")

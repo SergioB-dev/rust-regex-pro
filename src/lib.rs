@@ -6,6 +6,7 @@ pub mod user;
 /// Basic definitions of objects
 pub mod basic {
     use crate::questions;
+    use crate::user::User;
 
     pub struct Game {
         pub name: String,
@@ -44,11 +45,11 @@ pub mod basic {
     }
 
     impl Game {
-        pub fn ask_question(&self) {
+        pub fn ask_question(&self, user: &mut User) {
             match self.level {
-                Level::Easy => questions::ask_user_question("2004-10-21"),
-                Level::Medium => questions::ask_user_question("2004-10-22"),
-                Level::Hard => questions::ask_user_question("2004-10-23"),
+                Level::Easy => questions::ask_user_question("2004-10-21", user),
+                Level::Medium => questions::ask_user_question("2004-10-22", user),
+                Level::Hard => questions::ask_user_question("2004-10-23", user),
             }
         }
     }
@@ -82,11 +83,13 @@ pub mod game_flow {
         println!("{}", asci_art);
     }
 
-    pub fn show_game_header(user: User) {
+    pub fn show_game_header(user: &User) {
         show_ascii_art();
         let user_win_pct = user.pct();
+        let user_score = user.calculate_score();
         let user_ranking = user.get_user_ranking();
-        println!("\t%: {} \tRank: {}", user_win_pct, user_ranking);
+        println!("\t%: {} \tScore: {} \tRank: {}", user_win_pct,user_score, user_ranking);
+        println!("***********************************************\n\n")
     }
 
     pub fn begin_game() -> Game {
