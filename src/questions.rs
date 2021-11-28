@@ -10,7 +10,7 @@ pub fn ask_user_question(search_string: &str, user: &mut User) {
     println!("As your first challenge, come up  with a clever regex to capture this: \n\n\n\n");
     println!("\t \t--> {} <--", search_string);
 
-    let mut input = String::new();
+    let mut input =  String::new();
     stdin().read_line(&mut input).expect("Failed to read input");
 
     let re = Regex::new(&input.trim()).unwrap();
