@@ -28,5 +28,5 @@ pub mod preset_questions {
             points: 0,
             ranking: Ranking::Noob
         }
-    ];
+     ];
 }
