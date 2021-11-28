@@ -4,6 +4,7 @@ use regex::Regex;
 use crate::regex_qa::is_good_regex;
 use crate::user::{Ranking, User};
 
+
 /// Defines what a question consists of.
 /// `explanation` - Offers an explanation to how the regex works.
 /// `search_string` - The string the user is asked to capture with regex.
