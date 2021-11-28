@@ -1,11 +1,14 @@
 
 mod explanations;
 mod questions;
+pub mod constants;
+
 pub mod user;
 
-/// Basic definitions of objects
+/// Basic definitions of objects, traits, etc.
 pub mod basic {
     use crate::questions;
+    use crate::user::User;
 
     pub struct Game {
         pub name: String,
@@ -41,17 +44,10 @@ pub mod basic {
             println!("Player's name is: {}", self.name);
             println!("Chosen level is: {:?}", self.level);
         }
+
+
     }
 
-    impl Game {
-        pub fn ask_question(&self) {
-            match self.level {
-                Level::Easy => questions::ask_user_question("2004-10-21"),
-                Level::Medium => questions::ask_user_question("2004-10-22"),
-                Level::Hard => questions::ask_user_question("2004-10-23"),
-            }
-        }
-    }
 
     #[derive(Debug)]
     pub enum Level {
@@ -66,6 +62,8 @@ pub mod game_flow {
 
     use crate::basic::{Game, Level};
     use std::io;
+    use crate::questions::Question;
+    use crate::terminal_controls::clear_screen;
 
     use crate::user::User;
 
@@ -82,11 +80,13 @@ pub mod game_flow {
         println!("{}", asci_art);
     }
 
-    pub fn show_game_header(user: User) {
+    pub fn show_game_header(user: &User) {
         show_ascii_art();
         let user_win_pct = user.pct();
+        let user_score = user.calculate_score();
         let user_ranking = user.get_user_ranking();
-        println!("\t%: {} \tRank: {}", user_win_pct, user_ranking);
+        println!("\t%: {} \tScore: {} \tRank: {}", user_win_pct,user_score, user_ranking);
+        println!("***********************************************\n\n")
     }
 
     pub fn begin_game() -> Game {
@@ -111,6 +111,14 @@ pub mod game_flow {
         };
         println!("{:?}", chosen_level);
         Game::create_level_based_game(chosen_level)
+    }
+
+    pub fn present_questions(questions: [Question;3], user: &mut User) {
+        for question in questions.into_iter() {
+            question.ask_user_question(user);
+            clear_screen();
+            show_game_header(&user);
+        }
     }
 }
 

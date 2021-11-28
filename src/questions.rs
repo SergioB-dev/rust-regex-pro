@@ -2,31 +2,69 @@ use std::io::stdin;
 use regex::Regex;
 
 use crate::regex_qa::is_good_regex;
-use crate::user::User;
+use crate::user::{Ranking, User};
 
-/// A function that takes a search string such as: '2003-10-20' and does something. The function is incomplete at this point.
-/// `Result` indicates whether the user's answer was right or wrong, we should do something with that.
-pub fn ask_user_question(search_string: &str, user: &mut User) {
-    println!("As your first challenge, come up  with a clever regex to capture this: \n\n\n\n");
-    println!("\t \t--> {} <--", search_string);
 
-    let mut input = String::new();
-    stdin().read_line(&mut input).expect("Failed to read input");
+/// Defines what a question consists of.
+/// `explanation` - Offers an explanation to how the regex works.
+/// `search_string` - The string the user is asked to capture with regex.
+/// `filler_string` - Filler text that is placed around or even through the `search_string` to
+/// make things a little harder.
+/// `points` - How many points a question is worth.
+/// `level` - Which tier a question belongs to.
+pub struct Question {
+    pub explanation: &'static str,
+    pub search_string: &'static str,
+    pub filler_string: Option<&'static str>,
+    pub filler_order: FillerOrder,
+    pub points: u32,
+    pub ranking: Ranking,
+}
 
-    let re = Regex::new(&input.trim()).unwrap();
+impl Question {
+    pub fn ask_user_question(&self, user: &mut User) {
+        println!("As your first challenge, come up with a clever regex to capture this: \n\n\n\n");
+        let string_to_display = self.produce_user_facing_string();
+        println!("{}", string_to_display);
+        println!("[-] Extract --> {} <--", self.search_string);
 
-    // Print if the regex is correct or wrong
-    match is_good_regex(re, search_string) {
-        true => {
-            println!("Correct");
-            user.correct += 1;
-        },
-        false => {
-            println!("Wrong");
-            user.wrong += 1;
-        },
+        let mut input = String::new();
+        stdin().read_line(&mut input).expect("Failed to read input");
 
+        let re = Regex::new(&input.trim()).unwrap();
+
+        // Print if the regex is correct or wrong
+        match is_good_regex(re, self.search_string) {
+            true => {
+                println!("Correct");
+                user.correct += 1;
+                user.score += self.points;
+            },
+            false => {
+                println!("Wrong");
+                user.wrong += 1;
+            },
+        }
     }
 
-    //TODO: Do something with our result, preferably increment the User's score / ranking
+    pub fn produce_user_facing_string(&self) -> String {
+        let filler_words = self.filler_string.unwrap_or("");
+        let search_string = self.search_string;
+
+        match self.filler_order {
+            FillerOrder::Before => format!("'{} {}'", filler_words, search_string),
+            FillerOrder::After => format!("'{} {}'",search_string, filler_words),
+            FillerOrder::Basic => format!("'{}'", search_string),
+            FillerOrder::Throughout => format!("'{}'",search_string.to_string()) //FIXME: Currently filler words not used
+        }
+    }
 }
+
+/// An enum dictating how filler words are spread throughout the final string that is shown
+/// to the user.
+pub enum FillerOrder {
+    Before, After, Throughout, Basic
+}
+
+
+
