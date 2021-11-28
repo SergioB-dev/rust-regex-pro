@@ -23,7 +23,9 @@ pub struct Question {
 impl Question {
     pub fn ask_user_question(&self, user: &mut User) {
         println!("As your first challenge, come up with a clever regex to capture this: \n\n\n\n");
-        println!("\t \t--> {} <--", self.search_string);
+        let string_to_display = self.produce_user_facing_string();
+        println!("{}", string_to_display);
+        println!("[-] Extract --> {} <--", self.search_string);
 
         let mut input = String::new();
         stdin().read_line(&mut input).expect("Failed to read input");
@@ -43,12 +45,24 @@ impl Question {
             },
         }
     }
+
+    pub fn produce_user_facing_string(&self) -> String {
+        let filler_words = self.filler_string.unwrap_or("");
+        let search_string = self.search_string;
+
+        match self.filler_order {
+            FillerOrder::Before => format!("'{} {}'", filler_words, search_string),
+            FillerOrder::After => format!("'{} {}'",search_string, filler_words),
+            FillerOrder::Basic => format!("'{}'", search_string),
+            FillerOrder::Throughout => format!("'{}'",search_string.to_string()) //FIXME: Currently filler words not used
+        }
+    }
 }
 
 /// An enum dictating how filler words are spread throughout the final string that is shown
 /// to the user.
 pub enum FillerOrder {
-    Before, After, Throughout, None
+    Before, After, Throughout, Basic
 }
 
 
