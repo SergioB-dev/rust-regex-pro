@@ -55,7 +55,7 @@ impl Question {
         match self.filler_order {
             FillerOrder::Before => format!("'{} {}'", filler_words, search_string),
             FillerOrder::After => format!("'{} {}'",search_string, filler_words),
-            FillerOrder::Basic => format!("'{}'", search_string),
+            FillerOrder::Void => format!("'{}'", search_string),
             FillerOrder::Throughout => format!("'{}'",search_string.to_string()) //FIXME: Currently filler words not used
         }
     }
@@ -64,7 +64,7 @@ impl Question {
 /// An enum dictating how filler words are spread throughout the final string that is shown
 /// to the user.
 pub enum FillerOrder {
-    Before, After, Throughout, Basic
+    Before, After, Throughout, Void
 }
 
 

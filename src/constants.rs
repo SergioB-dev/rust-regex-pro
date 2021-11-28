@@ -8,7 +8,7 @@ pub mod preset_questions {
             explanation: "",
             search_string: "2004-10-10",
             filler_string: None,
-            filler_order: FillerOrder::Basic,
+            filler_order: FillerOrder::Void,
             points: 0,
             ranking: Ranking::Noob
         },
