@@ -7,7 +7,7 @@ use crate::user::User;
 /// A function that takes a search string such as: '2003-10-20' and does something. The function is incomplete at this point.
 /// `Result` indicates whether the user's answer was right or wrong, we should do something with that.
 pub fn ask_user_question(search_string: &str, user: &mut User) {
-    println!("As your first challenge, come up with a clever regex to capture this: \n\n\n\n");
+    println!("As your first challenge, come up  with a clever regex to capture this: \n\n\n\n");
     println!("\t \t--> {} <--", search_string);
 
     let mut input = String::new();
