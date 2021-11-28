@@ -5,6 +5,7 @@ pub struct User {
     pub correct: u8,
     pub wrong: u8,
     pub ranking: Ranking,
+    pub score: u32,
 }
 
 /// Represents the end user - the person playing the regex game. Keeps track of all relevant data during
@@ -18,6 +19,7 @@ impl User {
             correct: 0,
             wrong: 0,
             ranking: Ranking::Noob,
+            score: 0,
         }
     }
 
@@ -88,7 +90,8 @@ mod tests {
         let user1 = User {
             correct: 15,
             wrong: 15,
-            ranking: Ranking::Noob
+            ranking: Ranking::Noob,
+            score: 0
         };
         assert_eq!(user1.pct(), 0.50)
     }

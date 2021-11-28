@@ -1,9 +1,11 @@
 
 mod explanations;
 mod questions;
+pub mod constants;
+
 pub mod user;
 
-/// Basic definitions of objects
+/// Basic definitions of objects, traits, etc.
 pub mod basic {
     use crate::questions;
     use crate::user::User;
@@ -42,17 +44,10 @@ pub mod basic {
             println!("Player's name is: {}", self.name);
             println!("Chosen level is: {:?}", self.level);
         }
+
+
     }
 
-    impl Game {
-        pub fn ask_question(&self, user: &mut User) {
-            match self.level {
-                Level::Easy => questions::ask_user_question("2004-10-21", user),
-                Level::Medium => questions::ask_user_question("2004-10-22", user),
-                Level::Hard => questions::ask_user_question("2004-10-23", user),
-            }
-        }
-    }
 
     #[derive(Debug)]
     pub enum Level {
@@ -67,6 +62,8 @@ pub mod game_flow {
 
     use crate::basic::{Game, Level};
     use std::io;
+    use crate::questions::Question;
+    use crate::terminal_controls::clear_screen;
 
     use crate::user::User;
 
@@ -114,6 +111,14 @@ pub mod game_flow {
         };
         println!("{:?}", chosen_level);
         Game::create_level_based_game(chosen_level)
+    }
+
+    pub fn present_questions(questions: [Question;3], user: &mut User) {
+        for question in questions.into_iter() {
+            question.ask_user_question(user);
+            clear_screen();
+            show_game_header(&user);
+        }
     }
 }
 

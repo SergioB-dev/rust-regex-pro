@@ -1,7 +1,9 @@
 use clap::{App, Arg};
-use cli_regex::game_flow::{begin_game, show_ascii_art, show_game_header};
+use cli_regex::constants::preset_questions::NOOB_QUESTIONS;
+use cli_regex::game_flow::{begin_game, present_questions, show_ascii_art, show_game_header};
 use cli_regex::terminal_controls::clear_screen;
 use cli_regex::user::User;
+
 // mod questions;
 
 fn main() {
@@ -13,14 +15,8 @@ fn main() {
     let mut running_game = begin_game();
     clear_screen();
     show_game_header(&user);
+    present_questions(NOOB_QUESTIONS, &mut user);
 
-    running_game.ask_question(&mut user);
-    clear_screen();
-    show_game_header(&user);
-    running_game.ask_question(&mut user);
-    clear_screen();
-    show_game_header(&user);
-    running_game.ask_question(&mut user);
 
     let matches = App::new("First Test")
         .version("1.0")
@@ -44,7 +40,7 @@ fn main() {
         .get_matches();
 
     //println!("{}", running_game.message.unwrap());
-    running_game.print_game_details();
+
     let config = matches.value_of("config").unwrap_or("default.conf");
     println!("Value for config is: {}", config);
 }
