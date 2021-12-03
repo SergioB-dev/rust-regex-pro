@@ -60,6 +60,8 @@ pub mod basic {
 /// Control panel for the flow of the game from start to finish.
 pub mod game_flow {
 
+    use crossterm::style::{Color, Colored, SetForegroundColor, Stylize};
+
     use crate::basic::{Game, Level};
     use std::io;
     use crate::questions::Question;
@@ -114,7 +116,10 @@ pub mod game_flow {
     }
 
     pub fn present_questions(questions: [Question;3], user: &mut User) {
+
         for question in questions.into_iter() {
+
+
             question.ask_user_question(user);
             clear_screen();
             show_game_header(&user);

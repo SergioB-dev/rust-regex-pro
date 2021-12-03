@@ -1,4 +1,5 @@
 use clap::{App, Arg};
+use crossterm::style::Stylize;
 use cli_regex::constants::preset_questions::NOOB_QUESTIONS;
 use cli_regex::game_flow::{begin_game, present_questions, show_ascii_art, show_game_header};
 use cli_regex::terminal_controls::clear_screen;
@@ -10,6 +11,9 @@ fn main() {
     let mut user = User::new();
     clear_screen();
     show_game_header(&user);
+
+    // let this = "hello".on_dark_red();
+    // println!("{}", this);
 
     #[allow(unused_mut)]
     let mut running_game = begin_game();

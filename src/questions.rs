@@ -55,8 +55,8 @@ impl Question {
         match self.filler_order {
             FillerOrder::Before => format!("'{} {}'", filler_words, search_string),
             FillerOrder::After => format!("'{} {}'",search_string, filler_words),
+            FillerOrder::Throughout => format!("'{}'",search_string.to_string()), //FIXME: Currently filler words not used
             FillerOrder::Void => format!("'{}'", search_string),
-            FillerOrder::Throughout => format!("'{}'",search_string.to_string()) //FIXME: Currently filler words not used
         }
     }
 }
