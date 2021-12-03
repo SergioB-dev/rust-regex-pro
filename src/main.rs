@@ -1,9 +1,9 @@
 use clap::{App, Arg};
-use crossterm::style::Stylize;
 use cli_regex::constants::preset_questions::NOOB_QUESTIONS;
 use cli_regex::game_flow::{begin_game, present_questions, show_ascii_art, show_game_header};
 use cli_regex::terminal_controls::clear_screen;
 use cli_regex::user::User;
+use crossterm::style::Stylize;
 
 // mod questions;
 
@@ -20,7 +20,6 @@ fn main() {
     clear_screen();
     show_game_header(&user);
     present_questions(NOOB_QUESTIONS, &mut user);
-
 
     let matches = App::new("First Test")
         .version("1.0")

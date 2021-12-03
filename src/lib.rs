@@ -1,7 +1,6 @@
-
+pub mod constants;
 mod explanations;
 mod questions;
-pub mod constants;
 
 pub mod user;
 
@@ -26,7 +25,6 @@ pub mod basic {
         }
 
         pub fn create_level_based_game(chosen_level: Level) -> Game {
-
             let beginning_message = match chosen_level {
                 Level::Easy => "Alright, you better score 100%".to_string(),
                 Level::Medium => "Alright, let's see what you can do!".to_string(),
@@ -44,10 +42,7 @@ pub mod basic {
             println!("Player's name is: {}", self.name);
             println!("Chosen level is: {:?}", self.level);
         }
-
-
     }
-
 
     #[derive(Debug)]
     pub enum Level {
@@ -63,9 +58,9 @@ pub mod game_flow {
     use crossterm::style::{Color, Colored, SetForegroundColor, Stylize};
 
     use crate::basic::{Game, Level};
-    use std::io;
     use crate::questions::Question;
     use crate::terminal_controls::clear_screen;
+    use std::io;
 
     use crate::user::User;
 
@@ -87,7 +82,10 @@ pub mod game_flow {
         let user_win_pct = user.pct();
         let user_score = user.calculate_score();
         let user_ranking = user.get_user_ranking();
-        println!("\t%: {} \tScore: {} \tRank: {}", user_win_pct,user_score, user_ranking);
+        println!(
+            "\t%: {} \tScore: {} \tRank: {}",
+            user_win_pct, user_score, user_ranking
+        );
         println!("***********************************************\n\n")
     }
 
@@ -115,11 +113,8 @@ pub mod game_flow {
         Game::create_level_based_game(chosen_level)
     }
 
-    pub fn present_questions(questions: [Question;3], user: &mut User) {
-
+    pub fn present_questions(questions: [Question; 3], user: &mut User) {
         for question in questions.into_iter() {
-
-
             question.ask_user_question(user);
             clear_screen();
             show_game_header(&user);
@@ -140,11 +135,11 @@ pub mod regex_qa {
 
     pub fn is_good_regex(r: Regex, query_string: &str) -> bool {
         //FIXME: Buggy. User can enter erroneous regex and still be valid.
-          if let Some(re) = r.captures(query_string) {
-              re.get(0).map_or("", |m| m.as_str()) == query_string
-          } else {
-              false
-          }
+        if let Some(re) = r.captures(query_string) {
+            re.get(0).map_or("", |m| m.as_str()) == query_string
+        } else {
+            false
+        }
     }
 
     #[cfg(test)]
@@ -167,4 +162,3 @@ pub mod regex_qa {
         }
     }
 }
-
