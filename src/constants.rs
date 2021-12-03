@@ -3,14 +3,14 @@ pub mod preset_questions {
     use crate::questions::{FillerOrder, Question};
     use crate::user::Ranking;
 
-    pub const NOOB_QUESTIONS: [Question;3] = [
+    pub const NOOB_QUESTIONS: [Question; 3] = [
         Question {
             explanation: "",
             search_string: "2004-10-10",
             filler_string: None,
             filler_order: FillerOrder::Void,
             points: 0,
-            ranking: Ranking::Noob
+            ranking: Ranking::Noob,
         },
         Question {
             explanation: "",
@@ -18,7 +18,7 @@ pub mod preset_questions {
             filler_string: Some("My number is"),
             filler_order: FillerOrder::Before,
             points: 0,
-            ranking: Ranking::Noob
+            ranking: Ranking::Noob,
         },
         Question {
             explanation: "",
@@ -26,7 +26,7 @@ pub mod preset_questions {
             filler_string: Some("He lives in apartment"),
             filler_order: FillerOrder::Before,
             points: 0,
-            ranking: Ranking::Noob
-        }
-     ];
+            ranking: Ranking::Noob,
+        },
+    ];
 }

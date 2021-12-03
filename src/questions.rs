@@ -1,10 +1,9 @@
-use std::io::stdin;
 use regex::Regex;
+use std::io::stdin;
 
 use crate::regex_qa::is_good_regex;
 
 use crate::user::{Ranking, User};
-
 
 /// Defines what a question consists of.
 /// `explanation` - Offers an explanation to how the regex works.
@@ -40,11 +39,11 @@ impl Question {
                 println!("Correct");
                 user.correct += 1;
                 user.score += self.points;
-            },
+            }
             false => {
                 println!("Wrong");
                 user.wrong += 1;
-            },
+            }
         }
     }
 
@@ -54,9 +53,9 @@ impl Question {
 
         match self.filler_order {
             FillerOrder::Before => format!("'{} {}'", filler_words, search_string),
-            FillerOrder::After => format!("'{} {}'",search_string, filler_words),
+            FillerOrder::After => format!("'{} {}'", search_string, filler_words),
+            FillerOrder::Throughout => format!("'{}'", search_string.to_string()), //FIXME: Currently filler words not used
             FillerOrder::Void => format!("'{}'", search_string),
-            FillerOrder::Throughout => format!("'{}'",search_string.to_string()) //FIXME: Currently filler words not used
         }
     }
 }
@@ -64,8 +63,8 @@ impl Question {
 /// An enum dictating how filler words are spread throughout the final string that is shown
 /// to the user.
 pub enum FillerOrder {
-    Before, After, Throughout, Void
+    Before,
+    After,
+    Throughout,
+    Void,
 }
-
-
-

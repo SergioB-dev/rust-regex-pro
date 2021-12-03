@@ -1,4 +1,3 @@
-
 use crate::basic::Level;
 
 pub struct User {
@@ -29,7 +28,6 @@ impl User {
     /// increment their score by.
     pub fn increment(&mut self, qta: Level) {
         //TODO: Current implementation is basic and not correct, see above documentation
-
     }
 
     pub fn pct(&self) -> f32 {
@@ -77,7 +75,6 @@ pub enum Ranking {
     Knight,
     Sage,
     Master,
-
     // Pro, Master, Hacker
 }
 
@@ -91,7 +88,7 @@ mod tests {
             correct: 15,
             wrong: 15,
             ranking: Ranking::Noob,
-            score: 0
+            score: 0,
         };
         assert_eq!(user1.pct(), 0.50)
     }
