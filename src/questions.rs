@@ -31,19 +31,17 @@ impl Question {
         let mut input = String::new();
         stdin().read_line(&mut input).expect("Failed to read input");
 
-        let re = Regex::new(&input.trim()).unwrap();
+        let regex_is_correct = Regex::new(input.trim())
+            .map(|re| is_good_regex(re, self.search_string))
+            .unwrap_or(false);
 
-        // Print if the regex is correct or wrong
-        match is_good_regex(re, self.search_string) {
-            true => {
-                println!("Correct");
-                user.correct += 1;
-                user.score += self.points;
-            }
-            false => {
-                println!("Wrong");
-                user.wrong += 1;
-            }
+        if regex_is_correct {
+            println!("Correct");
+            user.correct += 1;
+            user.score += self.points;
+        } else {
+            println!("Wrong");
+            user.wrong += 1;
         }
     }
 
