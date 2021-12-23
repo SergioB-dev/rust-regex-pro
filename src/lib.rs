@@ -124,8 +124,15 @@ pub mod game_flow {
 
 /// Basic terminal controls
 pub mod terminal_controls {
+    use std::io;
+
+    use crossterm::{
+        execute,
+        terminal::{Clear, ClearType},
+    };
+
     pub fn clear_screen() {
-        std::process::Command::new("clear").status().unwrap();
+        execute!(io::stdout(), Clear(ClearType::All)).unwrap();
     }
 }
 
