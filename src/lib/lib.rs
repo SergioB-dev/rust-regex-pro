@@ -1,13 +1,6 @@
-pub mod constants;
-mod explanations;
-mod questions;
-
-pub mod user;
 
 /// Basic definitions of objects, traits, etc.
 pub mod basic {
-    use crate::questions;
-    use crate::user::User;
 
     pub struct Game {
         pub name: String,
@@ -55,11 +48,11 @@ pub mod basic {
 /// Control panel for the flow of the game from start to finish.
 pub mod game_flow {
 
-    use crossterm::style::{Color, Colored, SetForegroundColor, Stylize};
+//    use crossterm::style::{Color, Colored, SetForegroundColor, Stylize};
 
-    use crate::basic::{Game, Level};
+    use crate::lib::basic::{Game, Level};
     use crate::questions::Question;
-    use crate::terminal_controls::clear_screen;
+    use crate::lib::terminal_controls::clear_screen;
     use std::io;
 
     use crate::user::User;
@@ -151,7 +144,7 @@ pub mod regex_qa {
 
     #[cfg(test)]
     mod tests {
-        use crate::regex_qa::is_good_regex;
+        use crate::lib::regex_qa::is_good_regex;
         use regex::Regex;
 
         #[test]
