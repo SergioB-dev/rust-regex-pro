@@ -8,7 +8,7 @@ use lib::user::User;
 // mod questions;
 
 fn main() {
-    let mut user = User::new();
+    let mut user = User::default();
     clear_screen();
     show_game_header(&user);
 
