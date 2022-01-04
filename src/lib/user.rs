@@ -1,4 +1,4 @@
-use crate::basic::Level;
+use crate::lib::basic::Level;
 
 pub struct User {
     pub correct: u8,

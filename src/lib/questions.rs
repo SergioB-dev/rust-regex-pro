@@ -1,7 +1,7 @@
 use regex::Regex;
 use std::io::stdin;
 
-use crate::regex_qa::is_good_regex;
+use crate::lib::regex_qa::is_good_regex;
 
 use crate::user::{Ranking, User};
 
