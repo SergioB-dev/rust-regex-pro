@@ -54,12 +54,13 @@ pub mod game_flow {
     use crate::questions::Question;
     use crate::lib::terminal_controls::clear_screen;
     use std::io;
+    use std::process;
 
     use crate::user::User;
 
     pub fn show_ascii_art() {
         let asci_art = r#"
-        __________                                        __________
+__________                                        __________
 \______   \ ____   ____   ____ ___  ___           \______   \_______  ____
  |       _// __ \ / ___\_/ __ \\  \/  /   ______   |     ___/\_  __ \/  _ \
  |    |   \  ___// /_/  >  ___/ >    <   /_____/   |    |     |  | \(  <_> )
@@ -99,7 +100,8 @@ pub mod game_flow {
             Ok(_) => Level::Easy,
             Err(_err) => {
                 // TODO handle error in case the input is not an integer
-                Level::Easy
+                println!("Sorry, input must be a valid number");
+                process::exit(1);
             }
         };
         println!("{:?}", chosen_level);

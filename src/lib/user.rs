@@ -28,6 +28,11 @@ impl User {
     /// increment their score by.
     pub fn increment(&mut self, qta: Level) {
         //TODO: Current implementation is basic and not correct, see above documentation
+        match qta{
+            Level::Easy => self.score += 25,
+            Level::Medium => self.score += 50,
+            Level::Hard => self.score += 75,
+        }
     }
 
     pub fn pct(&self) -> f32 {
