@@ -23,7 +23,10 @@ pub struct Question {
 
 impl Question {
     pub fn ask_user_question(&self, user: &mut User, i: &i8) -> bool {
-        println!("For challenge number {}, come up with a clever regex to capture this: \n\n\n", i);
+        println!(
+            "For challenge number {}, come up with a clever regex to capture this: \n\n\n",
+            i
+        );
         let string_to_display = self.produce_user_facing_string();
         println!("{}", string_to_display);
         println!("[-] Extract --> {} <--", self.search_string);
@@ -39,11 +42,11 @@ impl Question {
             println!("\n\nCorrect regex, well done :)\n\n");
             user.correct += 1;
             user.score += self.points;
-            return true;
+            true
         } else {
             println!("\n\nIncorrect regex, try again :/\n\n");
             user.wrong += 1;
-            return false;
+            false
         }
     }
 
@@ -54,7 +57,7 @@ impl Question {
         match self.filler_order {
             FillerOrder::Before => format!("'{} {}'", filler_words, search_string),
             FillerOrder::After => format!("'{} {}'", search_string, filler_words),
-            FillerOrder::Throughout => format!("'{}'", search_string.to_string()), //FIXME: Currently filler words not used
+            FillerOrder::Throughout => format!("'{}'", search_string), //FIXME: Currently filler words not used
             FillerOrder::Void => format!("'{}'", search_string),
         }
     }

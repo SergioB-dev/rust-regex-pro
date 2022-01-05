@@ -110,7 +110,7 @@ pub mod game_flow {
     pub fn present_questions(questions: [Question; 3], user: &mut User) {
         let mut i: i8 = 0;
         for question in questions.into_iter() {
-            i = i + 1;
+            i += 1;
             get_results(question, user, &mut i);
             show_game_header(&user);
         }
@@ -121,7 +121,7 @@ pub mod game_flow {
             clear_screen();
             return;
         }
-        return get_results(q, u, idx);
+        get_results(q, u, idx)
     }
 }
 
