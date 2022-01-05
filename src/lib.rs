@@ -124,6 +124,7 @@ pub mod game_flow {
 
     pub fn get_results(q: Question, u: &mut User, idx: &mut i8) {
         if q.ask_user_question(u, idx) {
+            clear_screen();
             return;
         }
         return get_results(q, u, idx);
