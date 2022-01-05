@@ -106,11 +106,19 @@ pub mod game_flow {
     }
 
     pub fn present_questions(questions: [Question; 3], user: &mut User) {
+        let mut i: i8 = 0;
         for question in questions.into_iter() {
-            question.ask_user_question(user);
-            clear_screen();
-            show_game_header(user);
+            i = i + 1;
+            get_results(question, user, &mut i);
+            show_game_header(&user);
         }
+    }
+
+    pub fn get_results(q: Question, u: &mut User, idx: &mut i8) {
+        if q.ask_user_question(u, idx) {
+            return;
+        }
+        return get_results(q, u, idx);
     }
 }
 
