@@ -1,9 +1,3 @@
-pub mod constants;
-mod explanations;
-mod questions;
-
-pub mod user;
-
 /// Basic definitions of objects, traits, etc.
 pub mod basic {
     use crate::questions;
@@ -55,11 +49,11 @@ pub mod basic {
 /// Control panel for the flow of the game from start to finish.
 pub mod game_flow {
 
-    use crossterm::style::{Color, Colored, SetForegroundColor, Stylize};
+    //    use crossterm::style::{Color, Colored, SetForegroundColor, Stylize};
 
-    use crate::basic::{Game, Level};
+    use crate::lib::basic::{Game, Level};
+    use crate::lib::terminal_controls::clear_screen;
     use crate::questions::Question;
-    use crate::terminal_controls::clear_screen;
     use std::io;
 
     use crate::user::User;

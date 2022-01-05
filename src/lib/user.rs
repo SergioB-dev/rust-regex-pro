@@ -1,5 +1,23 @@
-use crate::basic::Level;
+use crate::lib::basic::Level;
 
+#[allow(unused)]
+struct Answer {
+    correct: bool,
+    string_value: &'static str,
+}
+
+#[derive(Debug)]
+pub enum Ranking {
+    Noob,
+    Beginner,
+    Padawan,
+    Knight,
+    Sage,
+    Master,
+    // Pro, Master, Hacker
+}
+
+#[derive(Debug)]
 pub struct User {
     pub correct: u8,
     pub wrong: u8,
@@ -12,9 +30,8 @@ pub struct User {
 ///
 #[allow(unused)]
 impl User {
-    /// Creates a new user from scratch
-    pub fn new() -> User {
-        User {
+    pub fn default() -> Self {
+        Self {
             correct: 0,
             wrong: 0,
             ranking: Ranking::Noob,
@@ -26,7 +43,7 @@ impl User {
     /// qta = (Q)uestion (T)ype (A)nswered - Can be Easy, Medium, or Hard
     /// Depending on the level of difficulty of their question, this will determine how much to
     /// increment their score by.
-    pub fn increment(&mut self, qta: Level) {
+    pub fn increment(qta: Level) {
         //TODO: Current implementation is basic and not correct, see above documentation
     }
 
@@ -60,23 +77,7 @@ impl User {
         }
     }
 }
-
 //TODO: This will need to be persisted
-#[allow(unused)]
-struct Answer {
-    correct: bool,
-    string_value: &'static str,
-}
-
-pub enum Ranking {
-    Noob,
-    Beginner,
-    Padawan,
-    Knight,
-    Sage,
-    Master,
-    // Pro, Master, Hacker
-}
 
 #[cfg(test)]
 mod tests {
