@@ -1,8 +1,5 @@
 /// Basic definitions of objects, traits, etc.
 pub mod basic {
-    use crate::questions;
-    use crate::user::User;
-
     pub struct Game {
         pub name: String,
         pub level: Level,
@@ -112,7 +109,7 @@ pub mod game_flow {
         for question in questions.into_iter() {
             i += 1;
             get_results(question, user, &mut i);
-            show_game_header(&user);
+            show_game_header(user);
         }
     }
 
