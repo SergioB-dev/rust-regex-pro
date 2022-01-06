@@ -78,9 +78,6 @@ impl User {
         if total == 0.0 {
             // If total is 0, compiler will see it as NaN
             return 0.0;
-        }
-        if total == self.correct.into() {
-            self.correct.into()
         } else {
             (self.correct as f32 / total) * 100.00
         }
