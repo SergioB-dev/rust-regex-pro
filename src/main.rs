@@ -17,9 +17,11 @@ fn main() {
 
     #[allow(unused_mut)]
     let mut running_game = begin_game();
+    let level = running_game.level;
+
     clear_screen();
     show_game_header(&user);
-    present_questions(NOOB_QUESTIONS, &mut user);
+    present_questions(NOOB_QUESTIONS, &mut user, &level);
 
     let matches = App::new("First Test")
         .version("1.0")

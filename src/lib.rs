@@ -80,11 +80,10 @@ pub mod game_flow {
     pub fn show_game_header(user: &User) {
         show_ascii_art();
         let user_win_pct = user.pct();
-        let user_score = user.calculate_score();
         let user_ranking = user.get_user_ranking();
         println!(
-            "\t%: {} \tScore: {} \tRank: {}",
-            user_win_pct, user_score, user_ranking
+            "\t%: {:.2} \tPoints: {} \tRank: {}",
+            user_win_pct, user.points, user_ranking
         );
         println!("***********************************************\n\n")
     }
@@ -113,9 +112,9 @@ pub mod game_flow {
         Game::create_level_based_game(chosen_level)
     }
 
-    pub fn present_questions(questions: [Question; 3], user: &mut User) {
+    pub fn present_questions(questions: [Question; 3], user: &mut User, level: &Level) {
         for question in questions.into_iter() {
-            question.ask_user_question(user);
+            question.ask_user_question(user, level);
             clear_screen();
             show_game_header(&user);
         }
@@ -167,5 +166,12 @@ pub mod regex_qa {
             let search_string = "2004-12-12";
             assert_ne!(is_good_regex(bad_re, search_string), true)
         }
+
+        // #[test]
+        // fn spot_faulty_re_num() {
+        //     let good_re = Regex::new(r"\([0-9]+\)[0-9]+\-[0-9]+").unwrap();
+        //     let search_string = "(202)389-1200";
+        //     assert_ne!(is_good_regex(good_re, search_string), true)
+        // }
     }
 }

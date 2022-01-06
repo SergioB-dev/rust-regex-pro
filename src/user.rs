@@ -4,7 +4,7 @@ pub struct User {
     pub correct: u8,
     pub wrong: u8,
     pub ranking: Ranking,
-    pub score: u32,
+    pub points: i16,
 }
 
 /// Represents the end user - the person playing the regex game. Keeps track of all relevant data during
@@ -18,25 +18,55 @@ impl User {
             correct: 0,
             wrong: 0,
             ranking: Ranking::Noob,
-            score: 0,
+            points: 0,
         }
     }
 
     /// Called when a user answers correctly
     /// qta = (Q)uestion (T)ype (A)nswered - Can be Easy, Medium, or Hard
     /// Depending on the level of difficulty of their question, this will determine how much to
+    ///
     /// increment their score by.
-    pub fn increment(&mut self, qta: Level) {
-        //TODO: Current implementation is basic and not correct, see above documentation
+    pub fn increment(&mut self, qta: &Level, incr: bool) {
+        self.points += match qta {
+            Level::Easy => {
+                if incr {
+                    5
+                } else {
+                    -5
+                }
+            }
+            Level::Medium => {
+                if incr {
+                    10
+                } else {
+                    -10
+                }
+            }
+            Level::Hard => {
+                if incr {
+                    15
+                } else {
+                    -15
+                }
+            }
+        }
     }
-
+    /**
+     * Get percentage total win of correct scores
+     * @param self: User
+     * @returns final pct: f32
+     */
     pub fn pct(&self) -> f32 {
         let total = (self.correct + self.wrong) as f32;
         if total == 0.0 {
             // If total is 0, compiler will see it as NaN
-            0.0
+            return 0.0;
+        }
+        if total == self.correct.into() {
+            self.correct.into()
         } else {
-            self.correct as f32 / total
+            (self.correct as f32 / total) * 100.00
         }
     }
 
@@ -88,8 +118,16 @@ mod tests {
             correct: 15,
             wrong: 15,
             ranking: Ranking::Noob,
-            score: 0,
+            points: 0,
         };
-        assert_eq!(user1.pct(), 0.50)
+        assert_eq!(user1.pct(), 50.0);
+
+        let user2 = User {
+            correct: 66,
+            wrong: 6,
+            ranking: Ranking::Noob,
+            points: 12,
+        };
+        assert_eq!(user2.pct(), 91.66667);
     }
 }

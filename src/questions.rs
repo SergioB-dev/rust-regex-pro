@@ -3,8 +3,8 @@ use std::io::stdin;
 
 use crate::regex_qa::is_good_regex;
 
+use crate::basic::Level;
 use crate::user::{Ranking, User};
-
 /// Defines what a question consists of.
 /// `explanation` - Offers an explanation to how the regex works.
 /// `search_string` - The string the user is asked to capture with regex.
@@ -22,7 +22,7 @@ pub struct Question {
 }
 
 impl Question {
-    pub fn ask_user_question(&self, user: &mut User) {
+    pub fn ask_user_question(&self, user: &mut User, level: &Level) {
         println!("As your first challenge, come up with a clever regex to capture this: \n\n\n\n");
         let string_to_display = self.produce_user_facing_string();
         println!("{}", string_to_display);
@@ -38,10 +38,11 @@ impl Question {
         if regex_is_correct {
             println!("Correct");
             user.correct += 1;
-            user.score += self.points;
+            user.increment(level, true);
         } else {
             println!("Wrong");
             user.wrong += 1;
+            user.increment(level, false);
         }
     }
 
