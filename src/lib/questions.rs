@@ -1,10 +1,8 @@
+use crate::lib::basic::Level;
+use crate::lib::regex_qa::is_good_regex;
+use crate::user::{Ranking, User};
 use regex::Regex;
 use std::io::stdin;
-
-use crate::regex_qa::is_good_regex;
-
-use crate::basic::Level;
-use crate::user::{Ranking, User};
 /// Defines what a question consists of.
 /// `explanation` - Offers an explanation to how the regex works.
 /// `search_string` - The string the user is asked to capture with regex.
@@ -53,7 +51,7 @@ impl Question {
         match self.filler_order {
             FillerOrder::Before => format!("'{} {}'", filler_words, search_string),
             FillerOrder::After => format!("'{} {}'", search_string, filler_words),
-            FillerOrder::Throughout => format!("'{}'", search_string.to_string()), //FIXME: Currently filler words not used
+            FillerOrder::Throughout => format!("'{}'", search_string),
             FillerOrder::Void => format!("'{}'", search_string),
         }
     }

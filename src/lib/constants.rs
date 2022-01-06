@@ -1,5 +1,4 @@
 pub mod preset_questions {
-    use crate::basic::Level;
     use crate::questions::{FillerOrder, Question};
     use crate::user::Ranking;
 

@@ -1,14 +1,14 @@
 use clap::{App, Arg};
-use cli_regex::constants::preset_questions::NOOB_QUESTIONS;
-use cli_regex::game_flow::{begin_game, present_questions, show_ascii_art, show_game_header};
-use cli_regex::terminal_controls::clear_screen;
-use cli_regex::user::User;
-use crossterm::style::Stylize;
+
+use lib::constants::preset_questions::NOOB_QUESTIONS;
+use lib::lib::game_flow::{begin_game, present_questions, show_game_header};
+use lib::lib::terminal_controls::clear_screen;
+use lib::user::User;
 
 // mod questions;
 
 fn main() {
-    let mut user = User::new();
+    let mut user = User::default();
     clear_screen();
     show_game_header(&user);
 

@@ -11,3 +11,7 @@ clap = "~2.33"
 crossterm = "0.22.1"
 regex = "1.5.4"
 rusqlite = "0.26.1"
+
+[lib]
+name = "lib"
+path = "src/lib/mod.rs"
