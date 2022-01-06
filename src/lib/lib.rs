@@ -1,6 +1,5 @@
 /// Basic definitions of objects, traits, etc.
 pub mod basic {
-
     pub struct Game {
         pub name: String,
         pub level: Level,
@@ -105,11 +104,20 @@ pub mod game_flow {
     }
 
     pub fn present_questions(questions: [Question; 3], user: &mut User, level: &Level) {
+        let mut i: i8 = 0;
         for question in questions.into_iter() {
-            question.ask_user_question(user, level);
-            clear_screen();
+            i += 1;
+            get_results(question, user, level, &mut i);
             show_game_header(user);
         }
+    }
+
+    pub fn get_results(q: Question, u: &mut User, level: &Level, idx: &mut i8) {
+        if q.ask_user_question(u, level, idx) {
+            clear_screen();
+            return;
+        }
+        get_results(q, u, level, idx)
     }
 }
 
@@ -158,12 +166,5 @@ pub mod regex_qa {
             let search_string = "2004-12-12";
             assert_ne!(is_good_regex(bad_re, search_string), true)
         }
-
-        // #[test]
-        // fn spot_faulty_re_num() {
-        //     let good_re = Regex::new(r"\([0-9]+\)[0-9]+\-[0-9]+").unwrap();
-        //     let search_string = "(202)389-1200";
-        //     assert_ne!(is_good_regex(good_re, search_string), true)
-        // }
     }
 }

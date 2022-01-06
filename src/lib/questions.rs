@@ -20,8 +20,11 @@ pub struct Question {
 }
 
 impl Question {
-    pub fn ask_user_question(&self, user: &mut User, level: &Level) {
-        println!("As your first challenge, come up with a clever regex to capture this: \n\n\n\n");
+    pub fn ask_user_question(&self, user: &mut User, level: &Level, i: &i8) -> bool {
+        println!(
+            "For challenge number {}, come up with a clever regex to capture this: \n\n\n",
+            i
+        );
         let string_to_display = self.produce_user_facing_string();
         println!("{}", string_to_display);
         println!("[-] Extract --> {} <--", self.search_string);
@@ -34,13 +37,15 @@ impl Question {
             .unwrap_or(false);
 
         if regex_is_correct {
-            println!("Correct");
+            println!("\n\nCorrect regex, well done :)\n\n");
             user.correct += 1;
             user.increment(level, true);
+            true
         } else {
-            println!("Wrong");
+            println!("\n\nIncorrect regex, try again :/\n\n");
             user.wrong += 1;
             user.increment(level, false);
+            false
         }
     }
 
