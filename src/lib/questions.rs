@@ -1,10 +1,8 @@
+use crate::lib::basic::Level;
+use crate::lib::regex_qa::is_good_regex;
+use crate::user::{Ranking, User};
 use regex::Regex;
 use std::io::stdin;
-
-use crate::lib::regex_qa::is_good_regex;
-
-use crate::user::{Ranking, User};
-
 /// Defines what a question consists of.
 /// `explanation` - Offers an explanation to how the regex works.
 /// `search_string` - The string the user is asked to capture with regex.
@@ -22,7 +20,7 @@ pub struct Question {
 }
 
 impl Question {
-    pub fn ask_user_question(&self, user: &mut User, i: &i8) -> bool {
+    pub fn ask_user_question(&self, user: &mut User, level: &Level, i: &i8) -> bool {
         println!(
             "For challenge number {}, come up with a clever regex to capture this: \n\n\n",
             i
@@ -41,11 +39,12 @@ impl Question {
         if regex_is_correct {
             println!("\n\nCorrect regex, well done :)\n\n");
             user.correct += 1;
-            user.score += self.points;
+            user.increment(level, true);
             true
         } else {
             println!("\n\nIncorrect regex, try again :/\n\n");
             user.wrong += 1;
+            user.increment(level, false);
             false
         }
     }
@@ -57,7 +56,7 @@ impl Question {
         match self.filler_order {
             FillerOrder::Before => format!("'{} {}'", filler_words, search_string),
             FillerOrder::After => format!("'{} {}'", search_string, filler_words),
-            FillerOrder::Throughout => format!("'{}'", search_string), //FIXME: Currently filler words not used
+            FillerOrder::Throughout => format!("'{}'", search_string),
             FillerOrder::Void => format!("'{}'", search_string),
         }
     }

@@ -71,11 +71,10 @@ pub mod game_flow {
     pub fn show_game_header(user: &User) {
         show_ascii_art();
         let user_win_pct = user.pct();
-        let user_score = user.calculate_score();
         let user_ranking = user.get_user_ranking();
         println!(
-            "\t%: {} \tScore: {} \tRank: {}",
-            user_win_pct, user_score, user_ranking
+            "\t%: {:.2} \tPoints: {} \tRank: {}",
+            user_win_pct, user.points, user_ranking
         );
         println!("***********************************************\n\n")
     }
@@ -104,21 +103,21 @@ pub mod game_flow {
         Game::create_level_based_game(chosen_level)
     }
 
-    pub fn present_questions(questions: [Question; 3], user: &mut User) {
+    pub fn present_questions(questions: [Question; 3], user: &mut User, level: &Level) {
         let mut i: i8 = 0;
         for question in questions.into_iter() {
             i += 1;
-            get_results(question, user, &mut i);
+            get_results(question, user, level, &mut i);
             show_game_header(user);
         }
     }
 
-    pub fn get_results(q: Question, u: &mut User, idx: &mut i8) {
-        if q.ask_user_question(u, idx) {
+    pub fn get_results(q: Question, u: &mut User, level: &Level, idx: &mut i8) {
+        if q.ask_user_question(u, level, idx) {
             clear_screen();
             return;
         }
-        get_results(q, u, idx)
+        get_results(q, u, level, idx)
     }
 }
 
