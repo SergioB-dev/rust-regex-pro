@@ -77,7 +77,7 @@ impl User {
         let total = (self.correct + self.wrong) as f32;
         if total == 0.0 {
             // If total is 0, compiler will see it as NaN
-            return 0.0;
+            0.0
         } else {
             (self.correct as f32 / total) * 100.00
         }
