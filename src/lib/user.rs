@@ -25,17 +25,27 @@ pub struct User {
     pub points: i16,
 }
 
-/// Represents the end user - the person playing the regex game. Keeps track of all relevant data during
-/// their journey.
-///
-#[allow(unused)]
-impl User {
-    pub fn default() -> Self {
+impl Default for User {
+    fn default() -> Self {
         Self {
             correct: 0,
             wrong: 0,
             ranking: Ranking::Noob,
             points: 0,
+        }
+    }
+}
+
+/// Represents the end user - the person playing the regex game. Keeps track of all relevant data during
+/// their journey.
+///
+impl User {
+    pub fn new(correct: u8, wrong: u8, ranking: Ranking, points: i16) -> Self {
+        Self {
+            correct,
+            wrong,
+            ranking,
+            points,
         }
     }
 
