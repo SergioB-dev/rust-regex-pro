@@ -25,4 +25,4 @@ To get started:
   
 ## A CLI gamified journey for getting nice with Regex
 
-This project officially started on 11/25, and is a work in progress
+This project officially started on 11/25/21, and is a work in progress
